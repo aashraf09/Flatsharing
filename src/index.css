@@ -288,6 +288,57 @@ input {
 
 /* Responsive */
 
+/* DESKTOP STYLING */
+
+@media screen and (min-width: 1280px) {
+    nav {
+        font-size: 16px;
+    }
+
+    .signup {
+        padding: 1.5rem 3rem;
+        margin: 2rem 0;
+        border-radius: 20px;
+        height: auto;
+        width: 70vh;
+        margin-top: 4rem;
+    }
+    
+    .form-section-heading {
+        font-size: 36px;
+    }
+    
+    .form-section-description {
+        font-size: 16px;
+    }
+    
+    
+    form {
+        display: flex;
+        flex-direction: column;
+        /* margin-top: 1rem; */
+        margin-top: .5rem;
+        position: relative;
+    }
+    
+    label {
+        font-size: 16px;
+        font-weight: bolder;
+        line-height: 183.2%;
+        font-weight: 400;
+    }
+    
+    input {
+        background-color: #F4F4F4;
+        padding: .5rem 1rem;
+        border: 1px solid #E9E9E9;
+        border-radius: 20px;
+        margin: 0px 0 10px 0;
+        position: relative;
+    }
+}
+
+
 @media screen and (max-width: 992px) {
     .responsive-btn {
         display: block;
@@ -303,6 +354,19 @@ input {
 }
 
 
+@media screen and (max-width: 560px) {
+    .signup {
+        /* background-color: white; */
+        padding: 2rem 2rem;
+        border-radius: 20px;
+        /* height: auto; */
+        width: 80vw;
+    }
+
+    .form-section-bg {
+        max-height: 80vh;
+    }
+}
 @media screen and (max-width: 425px) {
     .signup {
         /* background-color: white; */
