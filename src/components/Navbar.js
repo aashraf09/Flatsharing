@@ -2,6 +2,7 @@ import React from 'react'
 import logo from '../assets/logo.svg'
 import user from '../assets/user.svg'
 import bars from '../assets/bars.svg'
+import language from '../assets/language.svg'
 
 const toggleNav = () => {
     const element = document.getElementById('toggle')
@@ -25,17 +26,16 @@ const Navbar = () => {
             </section>
             <section className="action-btn">
                 <div className="language">
+                    <img src={language} alt="" className='language'/>
                     <select name="language" id="language">
-                        <option value="english">English</option>
-                        <option value="spanish">Spanish</option>
-                        <option value="italian">Itatian</option>
+                        <option value="english">EL</option>
                     </select>
                 </div>
                 <div className="responsive-btn">
                     <img src={bars} alt="" onClick={toggleNav} />
                 </div>
                 <div className="buttons toggle-buttons">
-                    <button className='secondary-btn btn'>Sign Up</button>
+                    <button className='secondary-btn btn' style={{fontWeight: 'bolder', letterSpacing: '0.05rem'}}>Sign Up</button>
                     <button className='primary-btn btn'> <img src={user} alt="" className='user' />Log In</button>
                 </div>
             </section>

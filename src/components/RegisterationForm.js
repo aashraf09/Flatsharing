@@ -3,15 +3,35 @@ import captcha from '../assets/captcha.svg'
 import google from '../assets/google.svg'
 import facebook from '../assets/facebook.svg'
 import apple from '../assets/apple.svg'
+import eyeClose from '../assets/eyeClose.svg'
+import eyeOpen from '../assets/eyeOpen.svg'
+import validMark from '../assets/tick.svg'
+import notValidMark from '../assets/cross.svg'
+import warning from '../assets/warning.svg'
 
 //regular expressions for form validation
 const USER_REGEX = /^[A-z][A-z0-9-_]{3,23}$/;
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
+const NAME_LENGTH = /^.{4,24}$/;
+const ALPHABET_REGEX = /[a-zA-Z]/;
+const CAPITAL_REGEX = /[A-Z]/;
+const REGULAR_REGEX = /[a-z]/;
+const NUMBER_REGEX = /\d/;
+const PWD_LENGTH = /.{8,}/;
 
 
 const Registeration = () => {
+    // alphabet/ number/ capital letters validation
+    const [alphabet, setAlphabet] = useState(false)
+    const [nameLength, setNameLength] = useState(false)
+    const [capital, setCapital] = useState(false)
+    const [regular, setRegular] = useState(false)
+    const [number, setNumber] = useState(false)
+    const [length, setLength] = useState(false)
 
+
+// name validation
     const [userName, setUserName] = useState('')
     const [validName, setValidName] = useState(false)
     const [userFocus, setUserFocus] = useState(false)
@@ -23,16 +43,20 @@ const Registeration = () => {
     const [userPassword, setUserPassword] = useState('')
     const [validPassword, setValidPassword] = useState(false)
     const [passwordFocus, setPasswordFocus] = useState(false)
+    const [showPassword, setShowPassowrd] = useState(false)
     //confirm password
     const [matchPassword, setMatchPassword] = useState('')
     const [validMatch, setValidMatch] = useState(false)
     const [matchFocus, setMatchFocus] = useState(false)
+    const [showPasswordMatch, setShowPassowrdMatch] = useState(false)
     // error message
     const [errorMessage, setErrorMessage] = useState('')
 
 
     // userName validation
     useEffect(() => {
+        setAlphabet(ALPHABET_REGEX.test(userName))
+        setNameLength(NAME_LENGTH.test(userName))
         setValidName(USER_REGEX.test(userName))
     }, [userName])
     // email validation
@@ -42,6 +66,10 @@ const Registeration = () => {
     // password and match password validation
     useEffect(() => {
         setValidPassword(PWD_REGEX.test(userPassword))
+        setCapital(CAPITAL_REGEX.test(userPassword))
+        setRegular(REGULAR_REGEX.test(userPassword))
+        setNumber(NUMBER_REGEX.test(userPassword))
+        setLength(PWD_LENGTH.test(userPassword))
         setValidMatch(userPassword === matchPassword)
     }, [userPassword, matchPassword])
     //setting error message
@@ -77,13 +105,18 @@ const Registeration = () => {
                                 onFocus={() => setUserFocus(true)}
                                 onBlur={() => setUserFocus(false)}
                             />
-                            <p id='usernameNote' className={userFocus && userName && !validName ? 'instructions' : 'offscreen'}>
-                            <b>Default Name Requirements</b> <br />
+                            <p id='usernameNote' className={userFocus && userName ? 'instructions' : 'offscreen'}>
+                                <b>Default Name Requirements</b> <br />
                                 <ul>
-                                    <li>Must be atleast 4 - 24 characters long. </li>
-                                    <li>Must begin with a letter</li>
-                                    <li>Letters, Numbers, Underscores, Hyphens allowed</li>
-                                    
+                                    <p className='instruction'>
+                                    <img src={nameLength ? validMark : notValidMark} alt="" /> <p>Must be atleast 4 - 24 characters long.</p> 
+                                    </p>< br />
+                                    <p className='instruction'>
+                                    <img src={alphabet ? validMark : notValidMark} alt="" /> <p>Must begin with a letter</p> 
+                                    </p>< br />
+                                    <p className='instruction'>
+                                    <img src={validMark} alt="" /> <p>Letters, Numbers, Underscores, Hyphens allowed</p> 
+                                    </p>< br />
                                 </ul>
                             </p>
                         </div>
@@ -106,7 +139,7 @@ const Registeration = () => {
                         <label htmlFor="password">Password</label>
                         <div className="inputWrapper">
                             <input
-                                type="password"
+                                type={showPassword ? 'text' : 'password'}
                                 id='password'
                                 className={validMatch ? '' : 'invalid'}
                                 autoComplete='false'
@@ -117,34 +150,40 @@ const Registeration = () => {
                                 onFocus={() => setPasswordFocus(true)}
                                 onBlur={() => setPasswordFocus(false)}
                             />
+                            <img src={showPassword ? eyeClose : eyeOpen} onClick={e => setShowPassowrd(!showPassword)} alt="" className="eye" />
                             <p id='passwordNote' className={passwordFocus && !validPassword && userPassword ? 'instructions' : 'offscreen'}>
                                 <b>Default Password Requirements</b> <br />
                                 <ul>
-                                    <li>Must be atleast 8 characters long. </li>
-                                    <li>Must include atleast 1 English uppercase letter (A-Z)</li>
-                                    <li>Must include atleast 1 English lowercase letter (a-z)</li>
-                                    <li>Must include atleast 1 numeric character (0-9)</li>
-                                    
+                                    <p className='instruction'>
+                                    <img src={length ? validMark : notValidMark} alt="" /> <p>Must be atleast 8 characters long.</p> 
+                                    </p>< br />
+                                    <p className='instruction'>
+                                    <img src={capital ? validMark : notValidMark} alt="" /> <p>Must include atleast 1 English uppercase letter (A-Z)</p> 
+                                    </p>< br />
+                                    <p className='instruction'>
+                                    <img src={regular ? validMark : notValidMark} alt="" /> <p>Must include atleast 1 English lowercase letter (a-z)</p> 
+                                    </p>< br />
+                                    <p className='instruction'>
+                                    <img src={number ? validMark : notValidMark} alt="" /> <p>Must include atleast 1 numeric character (0-9)</p> 
+                                    </p>< br />
                                 </ul>
                             </p>
                         </div>
                         <label htmlFor="confirm-password">Confirm Password</label>
                         <div className="inputWrapper">
                             <input
-                                type="password"
+                                type={showPasswordMatch ? 'text' : 'password'}
+                                name='password'
                                 id='confirm-password'
                                 className={validMatch ? '' : 'invalid'}
                                 onChange={(e) => setMatchPassword(e.target.value)}
                                 value={matchPassword}
-                                aria-invalid={validMatch ? 'false' : 'true'}
-                                aria-describedby='validPasswordNote'
                                 onFocus={() => setMatchFocus(true)}
                                 onBlur={() => setMatchFocus(false)}
                             />
-                            <p id="validPasswordNote" className={matchFocus && !validMatch ? 'instructions' : 'offscreen'}>
-                                Must match the first password input field.
-                            </p>
+                            <img src={showPasswordMatch ? eyeClose : eyeOpen} onClick={e => setShowPassowrdMatch(!showPasswordMatch)} alt="" className="eye" />
                         </div>
+                        <p className="" style={validMatch ? {display: 'none'} : {display: 'flex', color: 'red', fontSize:'12px', alignItems: 'center', gap: '5px'}}> <img src={warning} alt="" />Password does not match</p>
                     </form>
                 </section>
                 <section className='buttons-section'>
@@ -155,7 +194,7 @@ const Registeration = () => {
                     <div className="captcha">
                         <div className="captcha-div">
                             <input type="checkbox" name="robot-check" id="captcha-check" />
-                            <label htmlFor="captcha-check">I'm not a robot</label>
+                            <p htmlFor="captcha-check">I'm not a robot</p>
                         </div>
                         <img src={captcha} alt="" />
                     </div>

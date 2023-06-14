@@ -17,10 +17,17 @@ ul {
 
 a {
     text-decoration: none;
+
 }
 
-a:hover, .link-underline {
+a:hover{
     border-bottom: 1px solid #F1C510;
+    /* font-weight: 600; */
+}
+
+.link-underline{
+    color: #66B855;
+    font-weight: bold;
 }
 
 .btn {
@@ -29,7 +36,9 @@ a:hover, .link-underline {
     cursor: pointer;
     line-height: 36px;
     font-size: 14px;
-    letter-spacing: 0.05rem;
+    letter-spacing: 0.15rem;
+    text-transform: uppercase;
+
 }
 
 .primary-btn {
@@ -37,11 +46,14 @@ a:hover, .link-underline {
     justify-content: center;
     align-items: center;
     gap: 10px;
-    width: 100px;
+    width: 120px;
     height: 40px;
     background: #F1C510;
     border: 2px solid #F1C510;
     border-radius: 14px;
+    /* text-transform: capitalize; */
+    color: white;
+    font-weight: bolder;
 }
 
 select {
@@ -61,13 +73,14 @@ nav {
     line-height: 36px;
     /* font-size: 16px; */
     font-size: 14px;
+    text-transform: uppercase;
     letter-spacing: 0.05rem;
 }
 
 .logo-section,
 .action-btn {
     display: flex;
-    gap: .7rem;
+    gap: 1rem;
     align-items: center;
 }
 
@@ -105,6 +118,12 @@ nav {
     display: none;
 }
 
+.language{
+    display: flex;
+    justify-content: center;
+    /* gap: 20px; */
+}
+
 /* REGISTRATION FORM */
 .register {
     background-image: url(./assets/bg-img.svg);
@@ -113,8 +132,19 @@ nav {
     background-position: center;
     min-height: 100vh;
     backdrop-filter: blur(5px);
-
+    
 }
+
+.form-section-bg::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Adjust opacity as needed */
+    z-index: 1;
+  }
 
 .form-section-bg {
     height: auto;
@@ -125,11 +155,13 @@ nav {
 
 .signup {
     background-color: white;
-    padding: 1rem 3rem;
+    padding: 1.5rem 3rem;
     margin: 2rem 0;
     border-radius: 20px;
     height: auto;
+    text-transform: capitalize;
     width: 70vh;
+    z-index: 1;
 }
 
 .form-section-heading {
@@ -138,6 +170,7 @@ nav {
 
 .form-section-description {
     font-size: 14px;
+    font-weight: bolder;
 }
 
 
@@ -172,9 +205,9 @@ input {
 
 .agreement-section {
     display: flex;
-    margin-top: 5px;
-    /* font-size: 8px; */
-    gap: 5px;
+    align-items:first baseline;
+    margin: 8px 0;
+    gap: 10px;
 }
 
 .captcha {
@@ -183,7 +216,7 @@ input {
     justify-content: space-between;
     align-items: center;
     box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.084), 0px 2px 3px rgba(0, 0, 0, 0.168);
-    padding: 0 10px;
+    padding: 0 15px;
     margin: 5px 0;
     border-radius: 10px;
 }
@@ -196,8 +229,7 @@ input {
 .captcha-div {
     display: flex;
     gap: 5px;
-    justify-content: center;
-    align-items: center;
+    margin-top: 5px;
 }
 
 .signup-btn {
@@ -261,7 +293,21 @@ input {
 }
 
 .instructions ul{
-    list-style:disc;
+    margin-top: 15px;
+}
+
+.instructions b{
+    font-size: 14px;
+}
+
+.instruction{
+    display: flex;
+    gap: 10px;
+}
+
+.instruction img{
+    width: 22px;
+    height: 18px;
 }
 
 .offscreen {
@@ -281,6 +327,20 @@ input {
 .accountExist{
     font-size: 14px;
     text-align: center;
+}
+
+.eye
+{
+    position: absolute;
+    right: 20px;
+    width: 22px;
+    height: 18px;
+    top: 8px;
+    color: #000;
+}
+
+#agreement{
+    accent-color: #66B855;
 }
 
 
